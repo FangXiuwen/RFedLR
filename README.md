@@ -2,9 +2,9 @@
 
 This repository provides resources for the following paper:
 
-> [**Towards Robust Parameter-Efficient Fine-Tuning for Federated Learning**]([NeurIPS Poster Towards Robust Parameter-Efficient Fine-Tuning for Federated Learning](https://neurips.cc/virtual/2025/loc/san-diego/poster/119736))  
+> [**Towards Robust Parameter-Efficient Fine-Tuning for Federated Learning**](https://neurips.cc/virtual/2025/loc/san-diego/poster/119736) 
 
-> Xiuwen Fang, [Mang Ye](https://marswhu.github.io/index.html)  
+> Xiuwen Fang, Mang Ye  
 
 > *NeurIPS 2025*
 
@@ -130,7 +130,7 @@ You can download the ViT base model from Hugging Face: [https://huggingface.co/g
 
 5. Place it in `Network/Models_Def/` folder
 
-2. **Verify model file**:
+6. **Verify model file**:
 
 ```bash
 ls -la Network/Models_Def/vit_base_patch16_224.bin
