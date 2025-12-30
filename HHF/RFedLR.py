@@ -344,11 +344,7 @@ if __name__ =='__main__':
             network = nn.DataParallel(network, device_ids=device_ids).to(device)
             network.train()
             # robust_mask = None
-            network,private_loss_batch_list, participant_robust_mask = update_model_via_private_data(device=device,network=network,private_dataloader=train_dl,
-                                                                            loss_function=Pariticpant_Params['loss_funnction'],
-                                                                            optimizer_method=Pariticpant_Params['optimizer_name'],
-                                                                            learning_rate=Pariticpant_Params['learning_rate'],logger=logger, 
-                                                                            robust_mask=None)
+            network,private_loss_batch_list, participant_robust_mask = update_model_via_private_data(device=device,network=network,private_dataloader=train_dl,loss_function=Pariticpant_Params['loss_funnction'],optimizer_method=Pariticpant_Params['optimizer_name'],learning_rate=Pariticpant_Params['learning_rate'],logger=logger, robust_mask=participant_robust_mask_list[participant_index])
             network.module.freeze_lora_parameters(freeze_a=False, freeze_b=False)
             mean_private_loss_batch = np.mean(private_loss_batch_list)
             local_loss_batch_list.append(mean_private_loss_batch)
@@ -356,8 +352,7 @@ if __name__ =='__main__':
             _, _, _, importance_mean = calculate_robust(proxy_clean_train_dl, proxy_noisy_train_dl, network, Robust_Ratio)
             importance_mean_list.append(importance_mean)
             importance_mean_sum += importance_mean[train_matrix]
-            
-            all_models[participant_index].load_state_dict(network.module.state_dict())
+
         local_loss_list.append(local_loss_batch_list)
 
         epoch_avg_loss = sum(local_loss_batch_list) / len(local_loss_batch_list)
